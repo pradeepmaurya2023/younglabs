@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple API</title>
+</head>
+<body>
+    <h1>Simple API</h1>
+    <form id="greetForm">
+        <input type="text" id="name" placeholder="Enter your name">
+        <button type="submit">Greet</button>
+    </form>
+    <p id="response"></p>
+    <script>
+        document.getElementById('greetForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const response = await fetch(`/api/greet?name=${name}`);
+            const data = await response.json();
+            document.getElementById('response').innerText = data.message || data.error;
+        });
+    </script>
+</body>
+</html>
